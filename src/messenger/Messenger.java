@@ -28,9 +28,9 @@ public class Messenger {
 		JPanel panel = new JPanel();
 		
 		JButton button = new JButton("Submit");
-		JTextField toUsers = new JTextField(10);
+		JTextField toUsers = new JTextField("blah@DOMAIN.COM");
 		JTextField fromUser = new JTextField(10);
-		JTextField subject = new JTextField(10);
+		JTextField subject = new JTextField("SECURE:");
 		JTextArea body = new JTextArea(10, 30);
 		JLabel field1 = new JLabel("To: ");
 		JLabel field2 = new JLabel("From: ");
@@ -49,11 +49,6 @@ public class Messenger {
 				final String sub = subject.getText();
 				final String bod = body.getText();
 				submit(sender, reciever, sub, bod);
-				
-				fromUser.setText("");
-				toUsers.setText("");
-				subject.setText("");
-				body.setText("");
 			}
 			
 		});
@@ -128,7 +123,7 @@ public class Messenger {
 				int INDEX = e.indexOf("DOMAIN.COM");
 				
 				if (INDEX > 0) {
-//					Replace(body);
+					Replace(body);
 //					System.out.println(Replace(body));
 					REPLACES++;
 				}
@@ -141,7 +136,7 @@ public class Messenger {
 //		System.out.println(sub.substring(0,6));
 		if (sub.length()>6) {
 			if (sub.substring(0, 7).equals("SECURE:")) {
-//				Reverse(body);
+				Reverse(body);
 				REVERSALS++;
 			}
 		}
@@ -163,37 +158,28 @@ public class Messenger {
 		
 		if (nums >= 10) {
 //			System.out.println(Replace(body));
-//			Replace(body);
+			Replace(body);
 			REPLACES++;
 //			System.out.println(Reverse(body));
-//			Reverse(body);
+			Reverse(body);
 			REVERSALS++;
 		}
 		
 		System.out.println(REPLACES);
 		System.out.println(REVERSALS);
 		
-		SaveFile(sender, reciever, sub, body, REVERSALS, REPLACES);
+		SaveFile(sender, reciever, sub, body);
 		
 		
 	}
 	
-	public void SaveFile(String sender, String reciever, String subject, String body, int Rev, int Rep) {
-		
-		for (var i = 0; i < Rev; i++) {
-			body = Reverse(body);
-		}
-		
-		for (var i = 0; i < Rep; i++) {
-			body = Replace(body);
-		}
+	public void SaveFile(String sender, String reciever, String subject, String body) {
 		
 		final String fileName = String.valueOf(num) + ".txt";
 		
 		File data = new File("./docs/" + fileName);
 		PrintWriter printer;
 		try {
-			
 			num++;
 			printer = new PrintWriter(data);
 			printer.println("To: " + reciever);
