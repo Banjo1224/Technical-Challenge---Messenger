@@ -7,7 +7,8 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-import java.net.UnknownHostException;
+
+import java.sql.*;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -19,26 +20,23 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
-import org.json.*;
-
-import com.mongodb.MongoClient;
-import com.mongodb.MongoClientURI;
-
 public class Messenger {
 
 	private static int num = 1330000000;
 	
-	
 	public Messenger() {
-		// DECLARE COMPONENTS
-		try {
-			MongoClientURI uri = new MongoClientURI(
-				    "mongodb+srv://admin:LCS58jWXJt4K2b9@cluster0.eiwt2.mongodb.net/myFirstDatabase?retryWrites=true&w=majority");
-			MongoClient db = new MongoClient(uri);
-		} catch (UnknownHostException e) {
-			e.printStackTrace();
-		}
 		
+		
+		String url = "jdbc:mysql://localhost/messages";
+		String username = "root";
+		String password = "password!";
+		
+		try (Connection connect = DriverManager.getConnection(url, username, password)) {
+			System.out.println("Database Connected");
+		} catch (SQLException e) {
+			System.out.println(e);
+		}
+		// DECLARE COMPONENTS
 		
 		
 		JFrame frame = new JFrame();
