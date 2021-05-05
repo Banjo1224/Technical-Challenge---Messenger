@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+import java.net.UnknownHostException;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -16,13 +17,29 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 //import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.WindowConstants;
 
+import org.json.*;
 
+import com.mongodb.MongoClient;
+import com.mongodb.MongoClientURI;
 
 public class Messenger {
+
 	private static int num = 1330000000;
+	
+	
 	public Messenger() {
 		// DECLARE COMPONENTS
+		try {
+			MongoClientURI uri = new MongoClientURI(
+				    "mongodb+srv://admin:LCS58jWXJt4K2b9@cluster0.eiwt2.mongodb.net/myFirstDatabase?retryWrites=true&w=majority");
+			MongoClient db = new MongoClient(uri);
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+		}
+		
+		
 		
 		JFrame frame = new JFrame();
 		JPanel panel = new JPanel();
@@ -72,7 +89,7 @@ public class Messenger {
 //		// ADD PANEL TO FRAME
 //		
 		frame.add(panel, BorderLayout.CENTER);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		frame.setTitle("Messenger");
 		frame.pack();
 		frame.setVisible(true);
@@ -191,6 +208,8 @@ public class Messenger {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
+		
+		
 	}
 	
 	public String Reverse(String input) {
