@@ -192,6 +192,15 @@ public class Messenger {
 		
 		final String fileName = String.valueOf(num) + ".txt";
 		
+		String Query = "INSERT INTO messages (id, filename, data) VALUES (default, " + 
+				"\n To :" + reciever + 
+				"\n From: " + sender + 
+				"\n Subject: " + subject + 
+				"\n Body: " +
+				"\n" + body + ")";
+		
+		
+		
 		File data = new File("./docs/" + fileName);
 		PrintWriter printer;
 		try {
