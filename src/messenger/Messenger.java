@@ -200,7 +200,7 @@ public class Messenger {
 				"\n Body: " +
 				"\n" + body + ");";
 		
-		connect.
+		
 		
 		
 		File data = new File("./docs/" + fileName);
