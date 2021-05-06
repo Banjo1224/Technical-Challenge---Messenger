@@ -26,16 +26,6 @@ public class Messenger {
 	
 	public Messenger() {
 		
-		
-		String url = "jdbc:mysql://localhost/messages";
-		String username = "root";
-		String password = "password!";
-		
-		try (Connection connect = DriverManager.getConnection(url, username, password)) {
-			System.out.println("Database Connected");
-		} catch (SQLException e) {
-			System.out.println(e);
-		}
 		// DECLARE COMPONENTS
 		
 		
@@ -192,13 +182,25 @@ public class Messenger {
 		
 		final String fileName = String.valueOf(num) + ".txt";
 		
+		String url = "jdbc:mysql://localhost/messages";
+		String username = "root";
+		String password = "password!";
+		// ^^^ I know this is a cardinal sin, please forgive me for the hackjob of a database implementation, I promise I'm smarter than this
+		
+		try (Connection connect = DriverManager.getConnection(url, username, password)) {
+			System.out.println("Database Connected");
+		} catch (SQLException e) {
+			System.out.println(e);
+		}
+		
 		String Query = "INSERT INTO messages (id, filename, data) VALUES (default, " + 
 				"\n To :" + reciever + 
 				"\n From: " + sender + 
 				"\n Subject: " + subject + 
 				"\n Body: " +
-				"\n" + body + ")";
+				"\n" + body + ");";
 		
+		connect.
 		
 		
 		File data = new File("./docs/" + fileName);
